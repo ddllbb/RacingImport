@@ -1,0 +1,9 @@
+C:\Users\David\source\repos\RacingImport\RacingImport\obj\x86\Release\RacingImport.csproj.AssemblyReference.cache
+C:\Users\David\source\repos\RacingImport\RacingImport\obj\x86\Release\Interop.a3ERPActiveX.dll
+C:\Users\David\source\repos\RacingImport\RacingImport\obj\x86\Release\RacingImport.csproj.ResolveComReference.cache
+C:\Users\David\source\repos\RacingImport\RacingImport\obj\x86\Release\RacingImport.csproj.CoreCompileInputs.cache
+C:\Users\David\source\repos\RacingImport\RacingImport\bin\x86\Release\RacingImport.exe.config
+C:\Users\David\source\repos\RacingImport\RacingImport\bin\x86\Release\RacingImport.exe
+C:\Users\David\source\repos\RacingImport\RacingImport\bin\x86\Release\RacingImport.pdb
+C:\Users\David\source\repos\RacingImport\RacingImport\obj\x86\Release\RacingImport.exe
+C:\Users\David\source\repos\RacingImport\RacingImport\obj\x86\Release\RacingImport.pdb

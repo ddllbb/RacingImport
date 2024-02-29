@@ -1,0 +1,4 @@
+C:\Users\David\source\repos\RacingImport\RacingImport\obj\Release\RacingImport.csproj.AssemblyReference.cache
+C:\Users\David\source\repos\RacingImport\RacingImport\obj\Release\Interop.a3ERPActiveX.dll
+C:\Users\David\source\repos\RacingImport\RacingImport\obj\Release\RacingImport.csproj.ResolveComReference.cache
+C:\Users\David\source\repos\RacingImport\RacingImport\obj\Release\RacingImport.csproj.CoreCompileInputs.cache
