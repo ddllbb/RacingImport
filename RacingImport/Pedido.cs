@@ -100,7 +100,7 @@ namespace RacingImport
         string apiBaseUrl = "https://fuentecarrantona.com/wp-json/wc/v3";
         string ordersEndpoint = "/orders";
 
-        for (int i = 1; ; i++) 
+        for (int i = 1; ; i++) //paginacion woocommerce
         {
             HttpResponseMessage response = await client.GetAsync($"{apiBaseUrl}{ordersEndpoint}?page={i}");
             response.EnsureSuccessStatusCode();
@@ -126,22 +126,24 @@ namespace RacingImport
 
                         //Vemos si ya existe (modificarlo) o hay que crear nuevo pedido (insertar nuevo)
                         //Gestion IdA3
-                        //Primero voy a ver cómo inserto o modifico en pedido en la base de datos A3 y
+                        //Primero voy a ver cómo inserto o modifico un pedido en la base de datos A3 y
                         //luego veo si necesito gestionar el IdA3
                         //IdA3 = asignarIdA3(pedido, idsOrdersMap);
 
-                        //Insertar o modificar Pedido a BBDD
+                        //Insertar o modificar Pedido en la BBDD
                         IEnlace enlace = new a3ERPActiveX.Enlace();
                         enlace.Iniciar("LocalRacingImport", "");
                         //Documento: Pedidos
-                        EjemploDeCreacionNuevoPedido();
+                        //Modificar pedido existente
+                        //Insertar nuevo pedido
+                        EjemploDeInsertarNuevoPedido();
                     }
                 }
             }
         }
     }
     //Ejemplo crear nuevo pedido - Curso a3ERP
-    private void EjemploDeCreacionNuevoPedido()
+    private void EjemploDeInsertarNuevoPedido(Pedido pedido)
     {
         IPedido Documento = new a3ERPActiveX.Pedido();
         Documento.Iniciar();
@@ -151,32 +153,35 @@ namespace RacingImport
             try
             {
                 //Aquí ver en qué campos inserto las propiedades de la clase Pedido:
-                /*
-                IdA3 = [ "CAMPO" ]
-                DateCreated = [ "CAMPO" ]
-                ShippingTotal = [ "CAMPO" ]
-                Total = [ "CAMPO" ]
-                CustomerId = [ "CAMPO" ]
+                
+                Documento.AsStringCab[ "NUMDOC" ] = pedido.IdA3;
+                Documento.AsStringCab["FECENTREGA"] = DateTime.Now.ToString(pedido.DateCreated);
+                Documento.AsStringCab[ "CAMPO" ] = pedido.ShippingTotal;
+                Documento.AsStringCab[ "CAMPO" ] = pedido.Total;
+                Documento.AsIntegerCab[ "CAMPO" ] = pedido.CustomerId;
 
-                Billing:
-                    FirstName = [ "CAMPO" ]
-                    LastName = [ "CAMPO" ]
-                    Company = [ "CAMPO" ]
-                    Address1 = [ "CAMPO" ]
-                    City = [ "CAMPO" ]
-                    Postcode = [ "CAMPO" ]
-                    Country = [ "CAMPO" ]
-                    Email = [ "CAMPO" ]
-                    Phone = [ "CAMPO" ]
+               //Billing:
+                    Documento.AsStringCab[ "CAMPO" ] = pedido.FirstName;
+                    Documento.AsStringCab[ "CAMPO" ] = pedido.LastName;
+                    Documento.AsStringCab[ "CAMPO" ] = pedido.Company;
+                    Documento.AsStringCab[ "CAMPO" ] = pedido.Address1;
+                    Documento.AsStringCab[ "CAMPO" ] = pedido.City;
+                    Documento.AsStringCab[ "CAMPO" ] = pedido.Postcode;
+                    Documento.AsStringCab[ "CAMPO" ] = pedido.Country;
+                    Documento.AsStringCab[ "CAMPO" ] = pedido.Email;
+                    Documento.AsStringCab[ "CAMPO" ] = pedido.Phone;
 
-                LineItems:
-                    LineItemId = [ "CAMPO" ]
-                    Name = [ "CAMPO" ]
-                    ProductId = [ "CAMPO" ]
-                    Quantity = [ "CAMPO" ]
-                    Total = [ "CAMPO" ]
+                //LineItems:
+                    Documento.NuevaLineaArt(ProductId, Quantity); // Artículo 2 x 10 unidades.
+                    Documento.AnadirLinea();
+
+                 /* Documento.AsStringCab[ "CAMPO" ] = LineItemId;
+                    Documento.AsStringCab[ "CAMPO" ] = Name;
+                    Documento.AsStringCab[ "CAMPO" ] = ProductId;
+                    Documento.AsStringCab[ "CAMPO" ] = Quantity;
+                    Documento.AsStringCab[ "CAMPO" ] = Total;*/
                  
-                 */
+                 
 
                 Documento.AsStringCab[''SERIE''] = ''2020'';
                 //Documento.AsIntegerCab[''NUMDOC''] = 999999;
