@@ -11,8 +11,8 @@ namespace RacingImport
 {
     internal class ConectorWooCommerce
     {
-        private const String consumerKey = "ck_d6445233c3510c084209e0347549999285d3eb4a";
-        private const String consumerSecret= "cs_8ba2e34d5426adab00e357467140c1d2f6fd8501";
+        private const String consumerKey = ;
+        private const String consumerSecret= ;
         public HttpResponseMessage Put(string jsonBody, string apiUrl)
         {
             using (HttpClient httpClient = new HttpClient())
