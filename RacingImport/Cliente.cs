@@ -1,4 +1,5 @@
-﻿using System;
+﻿using a3ERPActiveX;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -41,6 +42,35 @@ namespace RacingImport
             Name = name;
             Phone = phone;
             Email = email;
+        }
+
+        public void ClientesDBToWoo()
+        {
+            //Maestro: CLIENTES
+            IMaestro maestro = new a3ERPActiveX.Maestro();
+            maestro.Iniciar("CLIENTES");
+
+            try
+            {
+                maestro.Primero();
+                while (!maestro.EOF)
+                {
+                    //Mapeo Tabla - Objeto
+                    IdA3 = maestro.AsString["CODCLI"];
+                    Name = maestro.AsString["USUARIO"];
+                    Email = maestro.AsString["E_MAIL_DOCS"];
+                    
+                    //cliente.ejecucionCliente();
+                    Console.WriteLine(ToString());
+
+                    maestro.Siguiente();
+                }
+            }
+            finally
+            {
+                //Se liberan los recursos al finalizar
+                maestro.Acabar();
+            }
         }
 
         public void ejecucionCliente()

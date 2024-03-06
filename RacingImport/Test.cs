@@ -14,6 +14,7 @@ using ADODB;
 
 namespace RacingImport
 {
+    /*
     internal class Probatinas
     {
         static void Main(string[] args)
@@ -33,108 +34,31 @@ namespace RacingImport
             Console.WriteLine("Lista de maestros:");
             Console.WriteLine(s);
         }
-    }
+    }*/
     
-   /* internal class Test
+    internal class Test
     {
         static void Main(string[] args)
         {
-            Producto producto = new Producto();
-            Cliente cliente = new Cliente();
-            ConectorWooCommerce connW = new ConectorWooCommerce();
-             
             IEnlace enlace = new a3ERPActiveX.Enlace();
             enlace.Iniciar("LocalRacingImport", "");
             Console.WriteLine(enlace.EmpresaActiva);
 
-            //Maestros: Ejecutar
-
-            //MetodosEjecutar.ArticulosDBToWoo(producto);
-            MetodosEjecutar.ClientesDBToWoo(cliente);
+            Producto producto = new Producto();
+            Cliente cliente = new Cliente();
+            Pedido pedido = new Pedido();   
+             
+            //cliente.ClientesDBToWoo();
+            //producto.ArticulosDBToWoo();
+            //pedido.PedidosWooToDB();
 
             enlace.Acabar();
             Console.WriteLine("Presione enter para salir...");
             Console.ReadLine();
         }
-    }*/
-
-    internal class MetodosEjecutar
-    {
-        public static void ClientesDBToWoo(Cliente cliente)
-        {
-            //Maestro: CLIENTES
-            IMaestro maestro = new a3ERPActiveX.Maestro();
-            maestro.Iniciar("CLIENTES");
-
-            try
-            {
-                maestro.Primero();
-                while (!maestro.EOF)
-                {
-                    //Mapeo Tabla - Objeto
-                    string idA3 = maestro.AsString["CODCLI"];
-                    string name = maestro.AsString["USUARIO"];
-                    string email = maestro.AsString["E_MAIL_DOCS"];
-                    // Ejecutar el cliente
-                    cliente.IdA3 = idA3;
-                    cliente.Name = name;
-                    cliente.Email = email;
-                    //cliente.ejecucionCliente();
-                    Console.WriteLine(cliente.ToString());
-
-                    maestro.Siguiente();
-                }
-            }
-            finally
-            {
-                //Se liberan los recursos al finalizar
-                maestro.Acabar();
-            }
-        }
-
-        public static void ClientesWooToDB(Cliente cliente)
-        {
-
-        }
-        public static void ArticulosDBToWoo(Producto producto)
-        {
-            //Maestro: ARTICULO
-            IMaestro maestro = new a3ERPActiveX.Maestro();
-            maestro.Iniciar("ARTICULO");
-
-            try
-            {
-                maestro.Primero();
-                while (!maestro.EOF)
-                {
-                    //Mapeo Tabla - Objeto
-                    string idA3 = maestro.AsString["CODART"];
-                    string name = maestro.AsString["DESCART"];
-                    double regularPrice = maestro.AsFloat["PRCVENTA"];
-                    double salePrice = maestro.AsFloat["PRCSTANDARD"];
-                    int stockAcutal = maestro.AsInteger["UNIDADESSTOCK"];
-
-                    // Ejecutar el producto
-                    producto.IdA3 = idA3;
-                    producto.Name = name;
-                    producto.RegularPrice = regularPrice;
-                    producto.SalePrice = salePrice;
-                    producto.StockActual = stockAcutal;
-                    //producto.ejecucionProducto();
-                    Console.WriteLine(producto.ToString());
-
-                    maestro.Siguiente();
-                }
-            }
-            finally
-            {
-                //Se liberan los recursos al finalizar
-                maestro.Acabar();
-            }
-
-         
-        }
     }
+
+   
     internal class EjemplosTest
     {
         /*ConectorWooCommerce connW = new ConectorWooCommerce();

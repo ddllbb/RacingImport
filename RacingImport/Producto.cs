@@ -1,4 +1,5 @@
-﻿using System;
+﻿using a3ERPActiveX;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -59,6 +60,39 @@ namespace RacingImport
             RegularPrice = regularPrice;
             SalePrice = salePrice;
             StockActual = stockActual;
+        }
+
+        public void ArticulosDBToWoo()
+        {
+            //Maestro: ARTICULO
+            IMaestro maestro = new a3ERPActiveX.Maestro();
+            maestro.Iniciar("ARTICULO");
+
+            try
+            {
+                maestro.Primero();
+                while (!maestro.EOF)
+                {
+                    //Mapeo Tabla - Objeto
+                     IdA3 = maestro.AsString["CODART"];
+                     Name = maestro.AsString["DESCART"];
+                     RegularPrice = maestro.AsFloat["PRCVENTA"];
+                     SalePrice = maestro.AsFloat["PRCSTANDARD"];
+                     StockActual = maestro.AsInteger["UNIDADESSTOCK"];
+
+                    //producto.ejecucionProducto();
+                    Console.WriteLine(ToString());
+
+                    maestro.Siguiente();
+                }
+            }
+            finally
+            {
+                //Se liberan los recursos al finalizar
+                maestro.Acabar();
+            }
+
+
         }
 
         public void ejecucionProducto()
